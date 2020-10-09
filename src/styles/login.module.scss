@@ -1,0 +1,105 @@
+.container{
+	width: 60%;
+	height: 70%;
+	box-shadow: 2px 4px 4px 0px #ababab, 9px 7px 7px 0px #ccc, -4px 4px 4px 0px #b1b1b1, -2px -3px 4px 0px #ccc;
+	border-radius: 0.5rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+}
+
+
+.wrapper{
+	width: 100%;
+	padding: 3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+.form_wrapper{
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	justify-content: center;
+}
+
+.btn_wrapper{
+	margin: 0.5rem 0rem;
+	display: flex;
+	width: 100%;
+}
+
+.btn{
+	padding: 0.5rem 0rem;
+	background-color:rgba(72, 52, 212,0.6);
+	color: #ccc;
+	width: 100%;
+	border-radius: 0.4rem;
+	border: none;
+	font-weight: 500;
+	font-size: 1.2rem;
+}
+.form{
+	display: flex;
+	flex-direction: column;
+}
+.label, .sub_text{
+	color: #616060;
+	font-size: 1.2rem;
+	font-weight: 500;
+	margin: 0.5rem 0rem;
+}
+.input_wrapper{
+	border-radius: 1rem;
+	margin: 0.5rem 0rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.input{
+	background-color: #ccc;
+	padding: 0.8rem 0.8rem;
+	border: none;
+	border-radius: 0.8rem;
+	font-size: 1rem;
+}
+
+.input:focus-visible{
+	outline: none;
+}
+.header{
+	display: flex;
+	flex-direction: column;
+}
+
+.hero{
+	width: 100%;
+	background-color: #4834d4;
+	border-radius: 0.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.hero_card{
+	color: #fff;
+}
+.hero_text{
+	font-size: 2.5rem;
+}
+
+.linkwrapper{
+	margin: 0.8rem 0rem;
+}
+
+.link_btn{
+	color: #fff;
+	text-decoration: none;
+	background: transparent;
+	padding: 0.5rem;
+	border: 1px solid #fff;
+	border-radius: 0.2rem;
+	cursor: pointer;
+}

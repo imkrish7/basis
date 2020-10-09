@@ -1,0 +1,72 @@
+.header{
+	height: 3.5rem;
+	width: 100%;
+	box-shadow: 0px 0px 4px 0px #ccc;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.navlist{
+	list-style: none;
+	display: flex;
+}
+.btn{
+	padding: 0.3rem 0.8rem;
+	font-size: 1.2rem;
+	font-weight: 400;
+	margin: 0rem 0.2rem;
+	border: 0.1rem solid blue;
+	background: transparent;
+	color: blue;
+	border-radius: 0.2rem;
+}
+
+.btnbackground{
+	background-color: blue;
+	color: #fff;
+}
+
+.navbar{
+	position: relative;
+}
+
+.options{
+	position: absolute;
+	width: 8rem;
+	background-color: #fff;
+	top: 2.5rem;
+	left: -3rem;
+	border-radius: 0.3rem;
+	padding: 0.5rem;
+	box-shadow: 0px 0px 4px 0px #ccc;
+	z-index: 99;
+}
+
+.option{
+	display: block;
+	font-size: 1rem;
+	font-weight: 500;
+	color:#7d7b7b;
+	padding: 0.5rem;
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+	line-height: 1.5rem;
+	text-decoration: none;
+}
+
+.no_border{
+	border: none;
+}
+
+
+.icon{
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	border: 1px solid #ccc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
