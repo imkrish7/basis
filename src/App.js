@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './Components/FontAwesomeIcons'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import './Components/FontAwesomeIcons';
 
 // Component
 import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import DefaultLayout from './Containers';
+import Referral from './Components/Referral/Referral'
+import EmailVerification from './Components/EmailVerification/EmailVerification'
 
+const isAuthenticated = () => {
+	return localStorage.getItem('basis_token') ? true : false;
+};
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+	return (
+		<Route
+			{...rest}
+			render={(props) =>
+				isAuthenticated() ? (
+					<Component {...props} />
+				) : null
+			}
+		/>
+	);
+};
 class App extends Component {
 	render() {
 		return (
@@ -14,7 +32,9 @@ class App extends Component {
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/dashboard" component={DefaultLayout} />
+					<Route exact path="/referral/:token?" component={Referral} />
+					<Route exact path="/email/verification" component={EmailVerification} />
+					<PrivateRoute path="/" component={DefaultLayout} />
 				</Switch>
 			</Router>
 		);

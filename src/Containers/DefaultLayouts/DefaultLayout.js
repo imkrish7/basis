@@ -10,13 +10,26 @@ import styles from '../../styles/default.module.scss'
 class DefaultLayout extends Component{
 	constructor(props){
 		super(props)
+	}
 
+	signout = () =>{
+		localStorage.clear()
+		window.location.href = "/login"
+	}
+
+	redirect = () => {
+		if(localStorage.getItem("basis_token")){
+			return <Redirect to="/dashboard" />
+		}else{
+			return <Redirect to="/login" />
+		}
 	}
 
 	render(){
 		return(
 			<div className={styles.container}>
-				<DefaultHeader />
+				{ this.redirect() }
+				<DefaultHeader logout={this.signout}/>
 				<main className={styles.main}>
 					<Suspense fallback={"...loading"}>
 						<Switch>

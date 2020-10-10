@@ -1,6 +1,6 @@
+
 .container{
-	width: 30%;
-	min-height: 40%;
+	min-height: 50%;
 	box-shadow: 2px 4px 4px 0px #ababab, 9px 7px 7px 0px #ccc, -4px 4px 4px 0px #b1b1b1, -2px -3px 4px 0px #ccc;
 	border-radius: 0.5rem;
 	display: grid;
@@ -8,8 +8,15 @@
 	grid-template-rows: 1fr;
 }
 
+.width_rn{
+	width: 30%;
+}
+.width_sn{
+	width: 50%;
+}
 
-.wrapper{
+
+.wrapper, .referrer_info{
 	width: 100%;
 	padding: 3rem;
 	display: flex;
@@ -20,23 +27,22 @@
 
 .form_wrapper{
 	width: 100%;
+}
+
+.col{
 	display: flex;
-	flex-direction: column;
-	background-color: #fff;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 .btn_wrapper{
 	margin: 0.5rem 0rem;
 	display: flex;
-	width: 100%;
 }
 
 .btn{
-	padding: 0.5rem 0rem;
+	padding: 0.5rem 0.7rem;
 	background-color:rgba(72, 52, 212,1);
 	color: #ccc;
-	width: 100%;
 	border-radius: 0.4rem;
 	border: none;
 	font-weight: 500;
@@ -59,12 +65,25 @@
 	flex-direction: column;
 }
 
-.input{
+.input_icon{
 	background-color: #ccc;
-	padding: 0.8rem 0.8rem;
+	display: flex;
+	align-items: center;
+	border-radius: 1.5rem;
+}
+
+.input{
+	// height: 100%;
 	border: none;
-	border-radius: 0.8rem;
-	font-size: 1rem;
+	background-color: transparent;
+	font-size: 1.3rem;
+	padding: 0.8rem 0.8rem;
+}
+
+.input_bg{
+	background-color: #ccc;
+	border-radius: 1rem;
+	padding: 0.8rem 0.5rem;
 }
 
 .input:focus-visible{
@@ -75,46 +94,22 @@
 	flex-direction: column;
 }
 
-.hero{
-	width: 100%;
-	background-color: #4834d4;
-	border-radius: 0.5rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
 
-.hero_card{
-	color: #fff;
-}
-.hero_text{
-	font-size: 2.5rem;
-}
-
-.options{
-	width: 100%;
-	height: 100%;
-	padding: 3rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
 
 .linkwrapper{
-	display: flex;
-	justify-content: space-between;
+	margin: 0.8rem 0rem;
 }
 
 .link_btn{
-	color: #fff;
+	color: rgba(72, 52, 212,1);
+	font-weight: 500;
+	font-size: 1rem;
 	text-decoration: none;
-	background: rgba(72, 52, 212,1);
+	background: transparent;
 	padding: 0.5rem;
-	border: 1px solid #fff;
+	border: 1px solid rgba(72, 52, 212,1);
 	border-radius: 0.2rem;
 	cursor: pointer;
-
 }
 
 .danger{
@@ -130,4 +125,23 @@
 
 .valid{
 	background-color:rgba(72, 52, 212,1);
+}
+.icon_wrapper{
+	cursor: pointer;
+}
+.icon{
+	font-size: 3rem;
+	color: rgba(72, 52, 212,1);
+}
+
+.info{
+	list-style: none;
+}
+
+.hero_card{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

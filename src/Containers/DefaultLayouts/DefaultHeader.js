@@ -17,6 +17,11 @@ class Header extends Component{
 		})
 	}
 
+	logout = () => {
+		console.log("click")
+		this.props.logout()
+	}
+
 	render(){
 		return(
 			<header className={styles.header}>
@@ -29,7 +34,7 @@ class Header extends Component{
 					</div>
 					{ this.state.show && <div className={styles.options}>
 						<Link to="/profile" className={styles.option}>Profile</Link>
-						<div className={[styles.option, styles.no_border].join(" ")}>Logout</div>
+						<div onClick={this.logout} className={[styles.option, styles.no_border].join(" ")}>Logout</div>
 					</div>}
 				</nav>
 			</header>
