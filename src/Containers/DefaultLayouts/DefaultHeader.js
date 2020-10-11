@@ -48,9 +48,7 @@ class Header extends Component{
 				this.props.logoutResponse &&
 				this.props.logoutResponse.success 
 				){
-					this.setState({
-						logout: true
-					})
+					this.signout()
 				}
 		} catch (error) {
 			alert('Something went wrong. It will lead to relogin. Sorry for inconvenience');
@@ -67,7 +65,7 @@ class Header extends Component{
 	render(){
 		return(
 			<header className={styles.header}>
-				{ this.state.logout && this.signout() }
+				{/* { this.state.logout && this.signout() } */}
 				<div className={styles.logo}>
 					<Link to="/dashboard" className={styles.logo_text}>Sample App</Link>
 				</div>
