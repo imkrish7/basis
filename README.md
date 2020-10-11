@@ -11,3 +11,6 @@ first clone or download
 # To start
 ## npm start or yarn start
 
+# To Build
+## npm build or yarn build
+
