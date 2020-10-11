@@ -18,6 +18,9 @@ const apiRequest = (dispatch, reqObj,actionLoading, actionSuccess, actionError) 
 			}
 		})
 		.catch(error => {
+			alert("Network error")
+			 window.location.href = '/login'
+			 localStorage.clear()
 			if (actionError) {
 				dispatch(actionError(error.response));
 			}

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from '../../styles/signup.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getReferralVerification } from '../../actions/userActions';
+import { errorRedirect } from '../../Utils/networkutils';
 class Referral extends Component {
 	constructor(props) {
 		super(props);
@@ -15,13 +16,20 @@ class Referral extends Component {
 		};
 	}
 	componentDidMount() {
-		const token = this.props.location.state.token;
-		const referralCode = this.props.match.params.token;
+		try {
+			const { token, phoneNumber, email } = this.props.location.state;
+			const referralCode = this.props.match.params.token;
 
-		this.setState({
-			token,
-			referralCode,
-		});
+			this.setState({
+				token,
+				email,
+				phoneNumber,
+				referralCode,
+			});
+		} catch (error) {
+			alert('Something went wrong. It will lead to relogin. Sorry for inconvenience');
+			errorRedirect();
+		}
 	}
 
 	handleChange = (event) => {
@@ -32,29 +40,40 @@ class Referral extends Component {
 	};
 
 	handleSubmit = (event) => {
+		if(this.state.referralCode.length > 0){
 		const params = {
 			token: this.state.referralCode,
 		};
 		this.props.getReferralVerification(params);
+	}else{
+		alert("Please enter referral")
+	}
 	};
 
 	componentDidUpdate(prevProps, prevState) {
-		if (
-			prevProps.referralVerificationResponse &&
-			this.props.referralVerificationResponse.data &&
-			this.props.referralVerificationResponse.success &&
-			prevProps.referralVerificationResponse.data != this.props.referralVerificationResponse.data
-		) {
-			console.log('Hell');
-			this.setState({
-				referrer: { ...this.props.referralVerificationResponse.data.results },
-				isReferralValid: true,
-			});
+		try {
+			if (
+				prevProps.referralVerificationResponse &&
+				this.props.referralVerificationResponse.data &&
+				this.props.referralVerificationResponse.success &&
+				prevProps.referralVerificationResponse.data != this.props.referralVerificationResponse.data
+			) {
+				this.setState({
+					referrer: { ...this.props.referralVerificationResponse.data.results },
+					isReferralValid: true,
+				});
+			}
+		} catch (error) {
+			alert('Something went wrong. It will lead to relogin. Sorry for inconvenience');
+			errorRedirect();
 		}
 	}
+	isValid = () => {
+		return this.state.referralCode.length > 0 && this.state.referralCode.length < 7;
+	};
 	render() {
 		return (
-			<div className={[styles.container, styles.width_rn].join(" ")}>
+			<div className={[styles.container, styles.width_rn].join(' ')}>
 				{!this.state.isReferralValid ? (
 					<div className={styles.wrapper}>
 						<div className={styles.header}>
@@ -67,15 +86,16 @@ class Referral extends Component {
 									<label className={styles.label}>Referral Code</label>
 									<div className={styles.input_icon}>
 										<input
+											required
 											onChange={this.handleChange}
 											name="referralCode"
 											value={this.state.referralCode}
 											placeholder="12323"
 											className={styles.input}
 										/>
-										<span onClick={this.handleSubmit} className={styles.icon_wrapper}>
+										<button disabled={this.isValid()} onClick={this.handleSubmit} className={styles.icon_wrapper}>
 											<FontAwesomeIcon className={styles.icon} icon={'arrow-circle-right'} />
-										</span>
+										</button>
 									</div>
 								</section>
 							</div>
@@ -91,17 +111,21 @@ class Referral extends Component {
 							<li className={styles.sub_text}>ReferralCode: {this.state.referralCode}</li>
 						</ul>
 						<div className={styles.linkwrapper}>
-							<Link 
-							className={styles.link_btn} 
-							to={{
-								pathname: "/signup",
-								state: {
-									token: this.state.token,
-									referralCode: this.state.referralCode,
-									referrer: {...this.state.referrer}
-								}
-							}}
-							>Signup Now</Link>
+							<Link
+								className={styles.link_btn}
+								to={{
+									pathname: '/signup',
+									state: {
+										token: this.state.token,
+										email: this.state.email,
+										phoneNumber: this.state.phoneNumber,
+										referralCode: this.state.referralCode,
+										referrer: { ...this.state.referrer },
+									},
+								}}
+							>
+								Signup Now
+							</Link>
 						</div>
 					</div>
 				)}

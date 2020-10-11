@@ -7,7 +7,7 @@ import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import DefaultLayout from './Containers';
 import Referral from './Components/Referral/Referral'
-import EmailVerification from './Components/EmailVerification/EmailVerification'
+import RequestEmailVerification from './Components/RequestEmailVerification/RequestEmailVerification'
 
 const isAuthenticated = () => {
 	return localStorage.getItem('basis_token') ? true : false;
@@ -32,8 +32,8 @@ class App extends Component {
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/email/verification" component={RequestEmailVerification} />
 					<Route exact path="/referral/:token?" component={Referral} />
-					<Route exact path="/email/verification" component={EmailVerification} />
 					<PrivateRoute path="/" component={DefaultLayout} />
 				</Switch>
 			</Router>

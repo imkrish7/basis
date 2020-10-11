@@ -1,24 +1,22 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import styles from '../../styles/dashboard.module.scss'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import styles from '../../styles/dashboard.module.scss';
 
-class Dashboard extends Component{
-
+class Dashboard extends Component {
 	redirect = () => {
-		console.log("called")
-		if(localStorage.getItem("basis_token")){
-			return <Redirect to="/dashboard" />
-		}else{
-			return <Redirect to="/login" />
+		if (localStorage.getItem('basis_token')) {
+			return <Redirect to="/dashboard" />;
+		} else {
+			return <Redirect to="/login" />;
 		}
-	}
-	render(){
-		return(
+	};
+	render() {
+		return (
 			<div className={styles.container}>
 				{this.redirect()}
 				<h1>Dashboard</h1>
 			</div>
-		)
+		);
 	}
 }
 

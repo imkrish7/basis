@@ -70,3 +70,14 @@
 	align-items: center;
 	cursor: pointer;
 }
+.logo_text{
+	text-decoration: none;
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+@media only screen and (max-width: 450px){
+	.logo_text{
+		font-size: 1.6rem;
+	}
+}

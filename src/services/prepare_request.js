@@ -5,14 +5,14 @@ export const request = {
 	get: function(dispatch, url, params, loadingAction, successAction, errorAction){
 		let headers = {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer' + localStorage.getItem('basis_token')
+			'Authorization': 'Bearer ' + params.id +","+ localStorage.getItem('basis_token')
 		}
 		const path = this.url + url;
 
 		const reqObj = {
 			method: 'GET',
 			url: path,
-			header: Headers,
+			headers,
 			data: params,
 		};
 
@@ -21,14 +21,14 @@ export const request = {
 	post: function(dispatch, url, params, loadingAction, successAction, errorAction){
 		let headers = {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer' + localStorage.getItem('basis_token')
+			'Authorization': 'Bearer ' + params.id +","+ localStorage.getItem('basis_token')
 		}
 		const path = this.url + url;
 
 		const reqObj = {
 			method: 'POST',
 			url: path,
-			header: Headers,
+			headers,
 			data: params,
 		};
 
@@ -37,15 +37,30 @@ export const request = {
 	put: function(dispatch, url, params, loadingAction, successAction, errorAction){
 		let headers = {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer' + localStorage.getItem('basis_token')
+			'Authorization': 'Bearer ' + params.id +","+ localStorage.getItem('basis_token')
 		}
 		const path = this.url + url;
 
 		const reqObj = {
 			method: 'PUT',
 			url: path,
-			header: Headers,
+			headers,
 			data: params,
+		};
+
+		Api_Call(dispatch,reqObj,loadingAction, successAction, errorAction)
+	},
+	delete: function(dispatch, url, params, loadingAction, successAction, errorAction){
+		let headers = {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + params.id +","+ localStorage.getItem('basis_token')
+		}
+		const path = this.url + url;
+
+		const reqObj = {
+			method: 'DELETE',
+			url: path,
+			headers
 		};
 
 		Api_Call(dispatch,reqObj,loadingAction, successAction, errorAction)
