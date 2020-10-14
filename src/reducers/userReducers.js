@@ -14,22 +14,24 @@ import {
 
 export function loginResponse(state = {}, action) {
 	switch (action.type) {
-		case getActionStates(GET_LOGIN).success:
-			
-			if(action.data.results.user){
+		case getActionStates(GET_LOGIN).success:{
+			if(action.data && action.data.results && action.data.results.user){
 				const { token } = action.data.results.user
 				localStorage.setItem('basis_token', token)
 			}
+
 			return {
 				...successState,
 				data: action.data,
 			};
+		}
 		case getActionStates(GET_LOGIN).inProgress:
 			return {
 				...loadingState,
 				loading: action.isLoading,
 			};
 		case getActionStates(GET_LOGIN).failure:
+			console.log("error")
 			return {
 				...errorState,
 				error: action.error,

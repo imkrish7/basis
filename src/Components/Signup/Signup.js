@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styles from '../../styles/signup.module.scss';
 import SignupForm from '../SignupForm/SignupForm';
 import { getSignup } from '../../actions/userActions';
@@ -14,6 +15,10 @@ class Signup extends Component {
 			signupSuccess: false,
 			phoneNumber: '',
 			email: '',
+			hasError: {
+				isError: false,
+				message: ""
+			}
 		};
 	}
 
@@ -56,19 +61,65 @@ class Signup extends Component {
 					signupSuccess: true,
 				});
 			}
+
+			if (
+				prevProps.signupResponse &&
+				this.props.signupResponse.success &&
+				this.props.signupResponse.data &&
+				!this.props.signupResponse.data.success &&
+				this.props.signupResponse.data != prevProps.signupResponse.data
+			) {
+				this.setState({
+					hasError: {
+						isError: true,
+						message: this.props.signupResponse.data.message
+					}
+				});
+			}
 		} catch (error) {
 			alert('Something went wrong. It will lead to relogin. Sorry for inconvenience');
 			errorRedirect();
 		}
+	}
+
+	goBack = ()=>{
+		this.setState({
+			hasError: {
+				isError: false,
+				message: ""
+			}
+		})
 	}
 	render() {
 		return (
 			<div
 				className={[styles.container, !this.state.signupSuccess ? styles.width_sn : styles.width_rn].join(' ')}
 			>
-				{this.state.email.length > 0 && this.state.phoneNumber.length > 0 && (
+				{!this.state.signupSuccess && this.state.email.length > 0 && this.state.phoneNumber.length > 0 && (
 					<SignupForm signup={this.signup} email={this.state.email} phoneNumber={this.state.phoneNumber} />
 				)}
+				{this.state.signupSuccess && <div className={styles.error_wrapper}>
+						<div className={styles.success_box}>
+							<div className={[styles.header, styles.width_full].join(" ")}>
+								<h1 className={styles.header_text}>Congratulation!</h1>
+								<p className={styles.sub_text}>You have completed Signup.</p>
+							</div>
+							<div className={[styles.gobtn, styles.width_full].join(" ")}>
+								<Link to="/login" className={styles.gobackbtn}>Login</Link>
+							</div>
+						</div>
+					</div>}
+					{this.state.hasError.isError && <div className={styles.error_wrapper}>
+						<div className={styles.error}>
+							<div className={[styles.header, styles.width_full].join(" ")}>
+								<h1 className={styles.header_text}>Error</h1>
+								<p className={styles.sub_text}>{this.state.hasError.message}</p>
+							</div>
+							<div className={[styles.gobtn, styles.width_full].join(" ")}>
+								<button onClick={this.goBack} className={styles.gobackbtn}>Go Back</button>
+							</div>
+						</div>
+					</div>}
 			</div>
 		);
 	}

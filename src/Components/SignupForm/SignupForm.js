@@ -37,6 +37,13 @@ class SignupForm extends Component {
 		});
 	};
 
+	isNumber = () => {
+		const phoneNumber = this.state.phoneNumber;
+		if (phoneNumber.length > 0) {
+			return /[a-z]/g.test(phoneNumber);
+		}
+	};
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 		const params = {
@@ -49,6 +56,24 @@ class SignupForm extends Component {
 		};
 		this.props.signup(params);
 	};
+
+	isValidPhoneNumber = () => {
+		const phoneNumber = this.state.phoneNumber;
+		return phoneNumber.length > 0 && phoneNumber.length == 10 && !this.isNumber();
+	};
+
+	isEmailValid = () => {
+		const email = this.state.email;
+		const emailValid = /[a-z0-9]*[@]+[a-z]*[\.]+[a-z]*/g.test(email);
+		return email.length > 0 && emailValid;
+	};
+
+	disabledToggle = () =>{
+		const { firstName, lastName, privacy} = this.state;
+
+		return this.isEmailValid() && privacy && this.isValidPhoneNumber() && firstName.length > 0 && lastName.length > 0
+	}
+
 	render() {
 		return (
 			<div className={styles.wrapper}>
@@ -91,9 +116,17 @@ class SignupForm extends Component {
 									onChange={this.handleChange}
 									value={this.state.phoneNumber}
 									placeholder="111-111-1111"
-									className={[styles.input, styles.input_bg].join(' ')}
+									className={[
+										styles.input, styles.input_bg, this.state.phoneNumber.length > 0
+										? this.isValidPhoneNumber()
+											? styles.success
+											: styles.danger
+										: null].join(' ')}
 									maxLength={10}
 								/>
+								{this.isNumber() && (
+												<label className={styles.label}>Otp should be Number.</label>
+											)}
 							</section>
 							<section className={styles.input_wrapper}>
 								<label className={styles.label}>Email</label>
@@ -103,8 +136,15 @@ class SignupForm extends Component {
 									onChange={this.handleChange}
 									value={this.state.email}
 									placeholder="Enter you email"
-									className={[styles.input, styles.input_bg].join(' ')}
+									className={[styles.input, styles.input_bg, this.state.email.length > 0
+										? this.isEmailValid()
+											? styles.success
+											: styles.danger
+										: null,].join(' ')}
 								/>
+								{this.state.email.length > 0 && !this.isEmailValid() && (
+													<p className={styles.sub_text}>Please enter valid email?</p>
+												)}
 							</section>
 						</div>
 						<div className={styles.col}>
@@ -123,7 +163,9 @@ class SignupForm extends Component {
 						</div>
 						<div className={styles.col}>
 							<section className={styles.btn_wrapper}>
-								<button className={styles.btn}>Submit</button>
+								<button disabled={ !this.disabledToggle() } className={[styles.btn,
+								 this.disabledToggle() ? styles.valid
+									: styles.disabled,].join(' ')}>Submit</button>
 							</section>
 						</div>
 					</form>
